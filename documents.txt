@@ -1,0 +1,203 @@
+step 1 Explsin the problem 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx>cd d06
+
+Step 2 create src and data 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>mkdir data
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>mkdir src
+
+step 3 initialize git 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git init 
+Initialized empty Git repository in D:/Data science/MLOPs/MLOps_campusx/D06/.git/
+
+step 4 initialize DVC
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc init
+Initialized DVC repository.
+
+step 5 create a github repository
+
+step 6 add remote for git 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git remote add origin https://github.com/bhaveshbohra/dvc.git
+
+step 7 add remote for dvc [changes in config file]
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>echo %TEMP%
+C:\Users\hp\AppData\Local\Temp
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc remote add -d myremote C:\Users\hp\AppData\Local\Temp\bhaveshdvc
+Setting 'myremote' as a default remote.
+
+
+step 8 git add first comit [dvc config files]
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git add .
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git add commit -m "Initial commmit"  
+[ taking snapshort for first stage ]
+
+step 9 write python code and excute 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>python src/data_ingestion.py
+
+step 10 add on dvc [muitiple changes]
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc add data/customer.csv
+100% Adding...|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████|1/1 [00:00,  4.24file/s] 
+                                                                                                                                                                                                                          
+To track the changes with git, run:
+
+        git add 'data\customer.csv.dvc' 'data\.gitignore'
+
+To enable auto staging, run:
+
+        dvc config core.autostage true
+
+Note : here muliple change :- 
+inside .dvc/cache create
+inside data gitignore and customer.csv.dvc create ( meta data and dvc cache file address[hash])  
+
+step 11 git status , git add  files and dvc files  
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git add .
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   .dvc/.gitignore
+        new file:   .dvc/config
+        new file:   .dvcignore
+        new file:   data/.gitignore
+        new file:   data/customer.csv.dvc
+        new file:   src/data_ingestion.py
+        new file:   txt.note
+
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git commit -m "add first experiment"  
+[main (root-commit) 27bb724] add first experiment
+ 7 files changed, 52 insertions(+)
+ create mode 100644 .dvc/.gitignore
+ create mode 100644 .dvc/config
+ create mode 100644 .dvcignore
+ create mode 100644 data/.gitignore
+ create mode 100644 data/customer.csv.dvc
+ create mode 100644 src/data_ingestion.py
+ create mode 100644 txt.note
+
+step 12 push data files in local/ cloud
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc push
+Collecting                                                                                                                                                                      |1.00 [00:00,  109entry/s]
+Pushing
+1 file pushed
+
+step 13 push in github
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin mai
+
+step ** doing version (forget by campusx)
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git tag -a v1.0 -m "version v1"
+
+step 14 change in data ingestion file 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>python src/data_ingestion.py
+
+step 15 check status of data and code files both 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   src/data_ingestion.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc status
+data\customer.csv.dvc:
+        changed outs:
+                modified:           data\customer.csv
+
+
+step 16 add data files first , check status(for check .csv.dvc create), and add to git 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc add data/customer.csv
+100% Adding...|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████|1/1 [00:00, 11.03file/s] 
+
+To track the changes with git, run:
+
+        git add 'data\customer.csv.dvc'
+
+To enable auto staging, run:
+
+        dvc config core.autostage true
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   data/customer.csv.dvc
+        modified:   src/data_ingestion.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git add .
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git commit -m "second experiment"  
+[main 978211a] second experiment
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+step 17 pushdata file and code file
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc push
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin main  
+
+step 18 for checking all commit 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git log --oneline
+978211a (HEAD -> main, origin/main) second experiment
+bc19358 (tag: v1.0) change file path
+27bb724 add first experiment
+
+step 19 for checking by id 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git checkout 27bb724
+Note: switching to '27bb724'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 27bb724 add first experiment
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc checkout
+Building workspace index                                                                                                                                                        |2.00 [00:00,  117entry/s]
+Comparing indexes                                                                                                                                                              |3.00 [00:00, 1.42kentry/s] 
+Applying changes                                                                                                                                                                |1.00 [00:00,  54.1file/s] 
+M       data\customer.csv
+
+
+step 20 using tags version to move from one place to other
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git checkout tags/v1.1 
+Previous HEAD position was 27bb724 add first experiment
+HEAD is now at 978211a second experiment
+
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc checkout
+Building workspace index                                                                                                                                                        |2.00 [00:00,  122entry/s]
+Comparing indexes                                                                                                                                                               |3.00 [00:00,  598entry/s] 
+Applying changes                                                                                                                                                                |1.00 [00:00,   294file/s] 
+M       data\customer.csv
+
+
+step 21 now suppose some other person clone my repo , how that person get my data (new team member)
+1) he/she creates folder and clone by git clone 
+2) dvc fetch   [helps for cache files ]
+3) dvc checkout [ helps for data files ]
+4) git checkout <tags/id unique no> [version move but data is latest version]
+5) dvc pull [for current version data in place u can use dvc fetch, dvc checkout 2 command]
+6) now already data we have in over system now just checkout as step 19/20
