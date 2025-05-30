@@ -83,8 +83,72 @@ Changes to be committed:
  create mode 100644 src/data_ingestion.py
  create mode 100644 txt.note
 
-step 12 
+step 12 push data files in local/ cloud
 (D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc push
 Collecting                                                                                                                                                                      |1.00 [00:00,  109entry/s]
 Pushing
 1 file pushed
+
+step 13 push in github
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin mai
+
+step ** doing version (forget by campusx)
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git tag -a v1.0 -m "version v1"
+
+step 14 change in data ingestion file 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>python src/data_ingestion.py
+
+step 15 check status of data and code files both 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   src/data_ingestion.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc status
+data\customer.csv.dvc:
+        changed outs:
+                modified:           data\customer.csv
+
+
+step 16 add data files first , check status(for check .csv.dvc create), and add to git 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc add data/customer.csv
+100% Adding...|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████|1/1 [00:00, 11.03file/s] 
+
+To track the changes with git, run:
+
+        git add 'data\customer.csv.dvc'
+
+To enable auto staging, run:
+
+        dvc config core.autostage true
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   data/customer.csv.dvc
+        modified:   src/data_ingestion.py
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git add .
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git commit -m "second experiment"  
+[main 978211a] second experiment
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+step 17 pushdata file and code file
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc push
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin main  
+
+step *** for checking all commit 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git log --oneline
+978211a (HEAD -> main, origin/main) second experiment
+bc19358 (tag: v1.0) change file path
+27bb724 add first experiment
