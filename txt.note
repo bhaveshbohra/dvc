@@ -1,0 +1,23 @@
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx>cd d06
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>mkdir data
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>mkdir src
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git init 
+Initialized empty Git repository in D:/Data science/MLOPs/MLOps_campusx/D06/.git/
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc init
+Initialized DVC repository.
+
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git remote add origin https://github.com/bhaveshbohra/dvc.git
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>echo %TEMP%
+C:\Users\hp\AppData\Local\Temp
+
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc remote add -d myremote C:\Users\hp\AppData\Local\Temp\bhaveshdvc
+Setting 'myremote' as a default remote.
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>
