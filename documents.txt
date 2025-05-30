@@ -201,3 +201,375 @@ step 21 now suppose some other person clone my repo , how that person get my dat
 4) git checkout <tags/id unique no> [version move but data is latest version]
 5) dvc pull [for current version data in place u can use dvc fetch, dvc checkout 2 command]
 6) now already data we have in over system now just checkout as step 19/20
+
+
+
+
+
+
+
+This part is important when u you are moving from one to other version please save and commit files else 
+you will loose files and changes before switch version 
+
+******************************************************
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git log --oneline    
+978211a (HEAD, tag: v1.1) second experiment
+bc19358 (tag: v1.0) change file path
+27bb724 add first experiment
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git checkout tags/v1.1
+HEAD is now at 978211a second experiment
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc checkout
+Building workspace index                                                                                                                                                        |2.00 [00:00,  233entry/s]
+Comparing indexes                                                                                                                                                              |3.00 [00:00, 1.49kentry/s] 
+Applying changes                                                                                                                                                                |0.00 [00:00,     ?file/s] 
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git log --oneline      
+978211a (HEAD, tag: v1.1) second experiment
+bc19358 (tag: v1.0) change file path
+27bb724 add first experiment
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+HEAD detached at v1.1
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   txt.note
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git add .
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git commit -m "modified txt"     
+[detached HEAD edae667] modified txt
+ 1 file changed, 114 insertions(+), 1 deletion(-)
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc status
+Data and pipelines are up to date.
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+HEAD detached from v1.1
+nothing to commit, working tree clean
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin main
+Everything up-to-date
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+HEAD detached from v1.1
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    txt.note
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        note.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git add . 
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+HEAD detached from v1.1
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        renamed:    txt.note -> note.txt
+
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git commit -m "rename file"
+[detached HEAD 9a9b9a2] rename file
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename txt.note => note.txt (100%)
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+HEAD detached from v1.1
+nothing to commit, working tree clean
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin main
+Everything up-to-date
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git log --oneline
+9a9b9a2 (HEAD) rename file
+edae667 modified txt
+978211a (tag: v1.1) second experiment
+bc19358 (tag: v1.0) change file path
+27bb724 add first experiment
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git checkout 9a9b9a2
+HEAD is now at 9a9b9a2 rename file
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc checkout        
+Building workspace index                                                                                                                                                        |2.00 [00:00,  218entry/s]
+Comparing indexes                                                                                                                                                              |3.00 [00:00, 1.16kentry/s] 
+Applying changes                                                                                                                                                                |0.00 [00:00,     ?file/s] 
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+HEAD detached from v1.1
+nothing to commit, working tree clean
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin main
+Everything up-to-date
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git mv txt.note note.txt
+fatal: bad source, source=txt.note, destination=note.txt
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git commit -m "Renamed txt.note to note.txt"
+HEAD detached from v1.1
+nothing to commit, working tree clean
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin main
+Everything up-to-date
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+HEAD detached from v1.1
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        document.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+HEAD detached from v1.1
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    note.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        document.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git add .
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git commit -m "update other files"
+[detached HEAD 23342f5] update other files
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename note.txt => document.txt (100%)
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin main
+Everything up-to-date
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git log --oneline        
+23342f5 (HEAD) update other files
+9a9b9a2 rename file
+edae667 modified txt
+978211a (tag: v1.1) second experiment
+bc19358 (tag: v1.0) change file path
+27bb724 add first experiment
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git chckout tags/v1.1
+git: 'chckout' is not a git command. See 'git --help'.
+
+The most similar command is
+        checkout
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git checkout tags/v1.1
+Warning: you are leaving 3 commits behind, not connected to
+any of your branches:
+
+  23342f5 update other files
+  9a9b9a2 rename file
+  edae667 modified txt
+
+If you want to keep them by creating a new branch, this may be a good time
+to do so with:
+
+ git branch <new-branch-name> 23342f5
+
+HEAD is now at 978211a second experiment
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc checkout
+Building workspace index                                                                                                                                                        |2.00 [00:00, 93.1entry/s]
+Comparing indexes                                                                                                                                                               |3.00 [00:00,  748entry/s] 
+Applying changes                                                                                                                                                                |0.00 [00:00,     ?file/s] 
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git log --oneline      
+978211a (HEAD, tag: v1.1) second experiment
+bc19358 (tag: v1.0) change file path
+27bb724 add first experiment
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git checkout 23342f5
+Previous HEAD position was 978211a second experiment
+HEAD is now at 23342f5 update other files
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git checkout tags/v1.1
+Warning: you are leaving 3 commits behind, not connected to
+any of your branches:
+
+  23342f5 update other files
+  9a9b9a2 rename file
+  edae667 modified txt
+
+If you want to keep them by creating a new branch, this may be a good time
+to do so with:
+
+ git branch <new-branch-name> 23342f5
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc checkout
+Building workspace index                                                                                                                                                        |2.00 [00:00,  281entry/s]
+Comparing indexes                                                                                                                                                              |3.00 [00:00, 1.42kentry/s]
+Applying changes                                                                                                                                                                |0.00 [00:00,     ?file/s]
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status   
+HEAD detached at v1.1
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    txt.note
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        documents.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git add .
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git commit -m "add document.txt"
+[detached HEAD eb5d5d7] add document.txt
+ 2 files changed, 203 insertions(+), 90 deletions(-)
+ create mode 100644 documents.txt
+ delete mode 100644 txt.note
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git tags -f v1.1
+git: 'tags' is not a git command. See 'git --help'.
+
+The most similar commands are
+        stage
+        tag
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git tag -f v1.1
+Updated tag 'v1.1' (was 40f01f6)
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin v1.1 --force
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 2.45 KiB | 2.45 MiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/bhaveshbohra/dvc.git
+ * [new tag]         v1.1 -> v1.1
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git tag --list
+v1.0
+v1.1
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git log --oneline
+eb5d5d7 (HEAD, tag: v1.1) add document.txt
+978211a second experiment
+bc19358 (tag: v1.0) change file path
+27bb724 add first experiment
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git checkout eb5d5d7
+HEAD is now at eb5d5d7 add document.txt
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc checkout
+Building workspace index                                                                                                           |2.00 [00:00,  182entry/s]
+Comparing indexes                                                                                                                  |3.00 [00:00,  967entry/s] 
+Applying changes                                                                                                                   |0.00 [00:00,     ?file/s] 
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origain main
+fatal: 'origain' does not appear to be a git repository
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin main
+Everything up-to-date
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git switch main
+Previous HEAD position was eb5d5d7 add document.txt
+Switched to branch 'main'
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git cherry-pick eb5d5d7
+CONFLICT (modify/delete): txt.note deleted in eb5d5d7 (add document.txt) and modified in HEAD.  Version HEAD of txt.note left in tree.
+error: could not apply eb5d5d7... add document.txt
+hint: After resolving the conflicts, mark them with
+hint: "git add/rm <pathspec>", then run
+hint: "git cherry-pick --continue".
+hint: You can instead skip this commit with "git cherry-pick --skip".
+hint: To abort and get back to the state before "git cherry-pick",
+hint: run "git cherry-pick --abort".
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin main
+To https://github.com/bhaveshbohra/dvc.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/bhaveshbohra/dvc.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+On branch main
+You are currently cherry-picking commit eb5d5d7.
+  (fix conflicts and run "git cherry-pick --continue")
+  (use "git cherry-pick --skip" to skip this patch)
+  (use "git cherry-pick --abort" to cancel the cherry-pick operation)
+
+Changes to be committed:
+        new file:   documents.txt
+
+Unmerged paths:
+  (use "git add/rm <file>..." as appropriate to mark resolution)
+        deleted by them: txt.note
+
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git add . 
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status
+On branch main
+You are currently cherry-picking commit eb5d5d7.
+  (all conflicts fixed: run "git cherry-pick --continue")
+  (use "git cherry-pick --skip" to skip this patch)
+  (use "git cherry-pick --abort" to cancel the cherry-pick operation)
+
+Changes to be committed:
+        new file:   documents.txt
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    txt.note
+
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git add .
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git commit "update comeback to main"
+fatal: cannot do a partial commit during a cherry-pick.
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git commit -m "update comeback to main" 
+[main 0fb4089] update comeback to main
+ Date: Fri May 30 08:55:36 2025 +0530
+ 1 file changed, 51 insertions(+), 2 deletions(-)
+ rename txt.note => documents.txt (71%)
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git status                              
+On branch main
+nothing to commit, working tree clean
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin main
+To https://github.com/bhaveshbohra/dvc.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'https://github.com/bhaveshbohra/dvc.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin main --force
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 2.71 KiB | 2.71 MiB/s, done.
+Total 6 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 1 local object.
+To https://github.com/bhaveshbohra/dvc.git
+ + 3f73723...0fb4089 main -> main (forced update)
