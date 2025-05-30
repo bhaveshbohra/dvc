@@ -147,8 +147,57 @@ step 17 pushdata file and code file
 
 (D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git push origin main  
 
-step *** for checking all commit 
+step 18 for checking all commit 
 (D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git log --oneline
 978211a (HEAD -> main, origin/main) second experiment
 bc19358 (tag: v1.0) change file path
 27bb724 add first experiment
+
+step 19 for checking by id 
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git checkout 27bb724
+Note: switching to '27bb724'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 27bb724 add first experiment
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc checkout
+Building workspace index                                                                                                                                                        |2.00 [00:00,  117entry/s]
+Comparing indexes                                                                                                                                                              |3.00 [00:00, 1.42kentry/s] 
+Applying changes                                                                                                                                                                |1.00 [00:00,  54.1file/s] 
+M       data\customer.csv
+
+
+step 20 using tags version to move from one place to other
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>git checkout tags/v1.1 
+Previous HEAD position was 27bb724 add first experiment
+HEAD is now at 978211a second experiment
+
+
+(D:\Data science\MLOPs\MLOps_campusx\mlops) D:\Data science\MLOPs\MLOps_campusx\D06>dvc checkout
+Building workspace index                                                                                                                                                        |2.00 [00:00,  122entry/s]
+Comparing indexes                                                                                                                                                               |3.00 [00:00,  598entry/s] 
+Applying changes                                                                                                                                                                |1.00 [00:00,   294file/s] 
+M       data\customer.csv
+
+
+step 21 now suppose some other person clone my repo , how that person get my data (new team member)
+1) he/she creates folder and clone by git clone 
+2) dvc fetch   [helps for cache files ]
+3) dvc checkout [ helps for data files ]
+4) git checkout <tags/id unique no> [version move but data is latest version]
+5) dvc pull [for current version data in place u can use dvc fetch, dvc checkout 2 command]
+6) now already data we have in over system now just checkout as step 19/20
